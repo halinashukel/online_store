@@ -11,7 +11,8 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 
-@Entity(name = "contacts")
+@Entity
+@Table(name = "contacts")
 
 public class Contact extends BaseEntity {
 

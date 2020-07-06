@@ -6,12 +6,14 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Getter
 @Setter
 @NoArgsConstructor
 
-@Entity(name = "personal_info")
+@Entity
+@Table(name = "personal_info")
 public class PersonalInfo extends BaseEntity {
 
     @Column(name = "login")

@@ -7,13 +7,15 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor
 
-@Entity(name = "products")
+@Entity
+@Table(name = "products")
 public class Product extends BaseEntity {
 
     @Column(name = "name")
