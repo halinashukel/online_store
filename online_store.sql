@@ -48,19 +48,17 @@ USE `online_store` ;
 -- -----------------------------------------------------
 -- Table `online_store`.`contacts`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `online_store`.`contacts` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `telephone` VARCHAR(45) NOT NULL,
-  `address_id` INT(11) NOT NULL,
-  `city` VARCHAR(50) NOT NULL,
-  `street` VARCHAR(50) NULL DEFAULT NULL,
-  `home` VARCHAR(50) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
-  INDEX `contacts_addresses_id_fk` (`address_id` ASC) VISIBLE)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+CREATE TABLE IF NOT EXISTS `online_store`.`contacts`
+(
+    `id`        INT(11)     NOT NULL AUTO_INCREMENT,
+    `telephone` VARCHAR(45) NOT NULL,
+    `city`      VARCHAR(50) NOT NULL,
+    `street`    VARCHAR(50) NULL DEFAULT NULL,
+    `home`      VARCHAR(50) NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE
+);
+
 
 
 -- -----------------------------------------------------

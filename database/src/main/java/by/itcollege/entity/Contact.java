@@ -21,4 +21,6 @@ public class Contact extends BaseEntity {
 
     @Embedded
     private Address address;
+
+
 }
