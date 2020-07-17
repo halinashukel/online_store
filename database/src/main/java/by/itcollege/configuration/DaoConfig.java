@@ -28,10 +28,11 @@ public class DaoConfig {
     @Value("${database.url}" )
     private String url;
     @Value("${database.driver}")
+
     private String driverClassName;
     @Value("${database.username}")
     private String username;
-    @Value("${database.password}")
+    @Value("root")
     private String password;
 
     @Value("${hibernate.dialect}")
@@ -44,44 +45,42 @@ public class DaoConfig {
     private String creationPolicy;
 
     @Bean
-    public DataSource dataSource(){
-        final DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(driverClassName);
+    public DataSource dataSource() {
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setUrl(url);
+        dataSource.setDriverClassName(driverClassName);
         dataSource.setUsername(username);
         dataSource.setPassword(password);
-        return dataSource();
+        return dataSource;
     }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean sessionFactory(){
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         vendorAdapter.setGenerateDdl(true);
 
-        LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
-        factoryBean.setJpaVendorAdapter(vendorAdapter);
-        factoryBean.setPackagesToScan("by.itcollege.entity");
-        factoryBean.setDataSource(dataSource());
-        factoryBean.setJpaProperties(jpaProperties());
-
-        return factoryBean;
+        LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
+        factory.setJpaVendorAdapter(vendorAdapter);
+        factory.setPackagesToScan("by.itcollege.entity");
+        factory.setDataSource(dataSource());
+        factory.setJpaProperties(hibernateProperties());
+        return factory;
     }
 
     @Bean
-    public Properties jpaProperties(){
+    public Properties hibernateProperties() {
         Properties properties = new Properties();
         properties.setProperty("hibernate.dialect", hibernateDialect);
         properties.setProperty("hibernate.show_sql", showSql);
         properties.setProperty("hibernate.format_sql", formatSql);
-        properties.setProperty("hibernate.creation_policy", creationPolicy);
+        properties.setProperty("hibernate.hbm2ddl_auto", creationPolicy);
         return properties;
     }
 
     @Bean
-    public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory){
+    public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory);
-        return  transactionManager;
+        return transactionManager;
     }
-
 }
