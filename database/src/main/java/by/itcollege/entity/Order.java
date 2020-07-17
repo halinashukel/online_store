@@ -25,7 +25,7 @@ public class Order extends BaseEntity {
     @Column(name = "date")
     private Date date;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
             name = "orders_products",
             joinColumns = @JoinColumn(name = "order_id"),

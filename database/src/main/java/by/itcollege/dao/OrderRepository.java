@@ -2,13 +2,10 @@ package by.itcollege.dao;
 
 import by.itcollege.entity.Order;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public interface OrderRepository extends CrudRepository<Order, Long> {
-    List<Order> findAllBy();
-    Order findById(Long id);
-    void deleteById(Long id);
-    Order save(Order order);
 
 }
